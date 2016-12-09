@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { TeamDetailPage } from '../pages';
 /*
   Generated class for the Teams page.
 
@@ -13,10 +14,13 @@ import { NavController } from 'ionic-angular';
 })
 export class TeamsPage {
 
-  constructor(public navCtrl: NavController) {}
+  constructor(private nav: NavController) {}
 
   ionViewDidLoad() {
     console.log('Hello TeamsPage Page');
   }
 
+  itemTapped(){
+    this.nav.push(TeamDetailPage);
+  }
 }
