@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
-import { MyTeamsPage } from 'pages/pages'
+import { MyTeamsPage } from '../pages/pages'
 
 @Component({
   templateUrl: 'app.html'
