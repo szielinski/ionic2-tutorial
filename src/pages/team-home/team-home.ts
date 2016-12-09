@@ -25,4 +25,8 @@ export class TeamHomePage {
     console.log('Hello TeamHomePage Page');
   }
 
+  goHome(){
+    this.nav.popToRoot();
+  }
+
 }
