@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 
 import { MyTeamsPage, TeamsPage } from '../pages';
 
+import { EliteApi } from '../../shared/shared'
+
 /*
   Generated class for the Tournaments page.
 
@@ -15,14 +17,15 @@ import { MyTeamsPage, TeamsPage } from '../pages';
 })
 export class TournamentsPage {
 
-  constructor(private nav: NavController) {}
+  tournaments: any;
+
+  constructor(private nav: NavController, private eliteApi: EliteApi) {}
+
+  itemTapped($event, tourney){
+    this.nav.push(TeamsPage, tourney);
+  }
 
   ionViewDidLoad() {
-    console.log('Hello TournamentsPage Page');
+    this.eliteApi.getTournamets().then(data => this.tournaments = data);
   }
-
-  itemTapped(){
-    this.nav.push(TeamsPage);
-  }
-
 }
