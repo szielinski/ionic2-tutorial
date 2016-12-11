@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import * as _ from 'lodash';
 
 import { EliteApi } from '../../shared/shared';
+import { GamePage } from '../../pages/pages';
 /*
   Generated class for the TeamDetail page.
 
@@ -22,6 +23,7 @@ export class TeamDetailPage {
   constructor(private nav: NavController, private navParams: NavParams, private eliteApi : EliteApi) {}
 
   ionViewDidLoad() {
+    console.log('ionViewDidLoad TeamDetailPage');
     this.team = this.navParams.data;
     this.tourneyData = this.eliteApi.getCurrentTourney();
 
@@ -53,6 +55,11 @@ export class TeamDetailPage {
     } else {
       return "";
     }
+  }
+
+  gameClicked($event, game){
+    let sourceGame = this.tourneyData.games.find(g => g.id === game.gameId);
+    this.nav.parent.parent.push(GamePage, sourceGame);
   }
 
 }
