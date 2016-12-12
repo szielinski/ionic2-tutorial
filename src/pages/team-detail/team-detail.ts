@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import * as _ from 'lodash';
+import * as moment from 'moment';
 
 import { EliteApi } from '../../shared/shared';
 import { GamePage } from '../../pages/pages';
@@ -16,9 +17,12 @@ import { GamePage } from '../../pages/pages';
   templateUrl: 'team-detail.html'
 })
 export class TeamDetailPage {
+  allGames: any[];
   games: any[];
-  team: any;
+  team: any = {};
+  teamStanding: any = {};
   private tourneyData: any;
+  dateFilter: string;
 
   constructor(private nav: NavController, private navParams: NavParams, private eliteApi : EliteApi) {}
 
@@ -44,6 +48,8 @@ export class TeamDetailPage {
                   };
                 })
                 .value();
+    this.allGames = this.games;
+    this.teamStanding = _.find(this.tourneyData.standings, { 'teamId': this.team.id});
   }
 
   getScoreDisplay(isTeam1, team1Score, team2Score){
@@ -62,4 +68,7 @@ export class TeamDetailPage {
     this.nav.parent.parent.push(GamePage, sourceGame);
   }
 
+  dateChanged(){
+    this.games = _.filter(this.allGames, g => moment(g.time).isSame(this.dateFilter, 'day'));
+  }
 }
