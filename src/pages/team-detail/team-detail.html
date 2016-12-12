@@ -43,6 +43,7 @@
         </ion-col>
         <ion-col width-20>
           <h4>{{game.scoreDisplay}}</h4>
+          <ion-badge [color]="getScoreDisplayBadgeClass(game)">{{getScoreWL(game)}}</ion-badge>
         </ion-col>
       </ion-row>
     </ion-item>

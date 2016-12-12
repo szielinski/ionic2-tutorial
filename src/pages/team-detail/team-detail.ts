@@ -64,6 +64,10 @@ export class TeamDetailPage {
     }
   }
 
+  getScoreDisplayBadgeClass(game){
+    return game.scoreDisplay.indexOf('W:') === 0 ? 'primary' : 'danger';
+  }
+
   gameClicked($event, game){
     let sourceGame = this.tourneyData.games.find(g => g.id === game.gameId);
     this.nav.parent.parent.push(GamePage, sourceGame);
@@ -75,5 +79,9 @@ export class TeamDetailPage {
     } else {
       this.games = this.allGames;
     }
+  }
+
+  getScoreWL(game){
+    return game.scoreDisplay ? game.scoreDisplay[0] : '';
   }
 }
