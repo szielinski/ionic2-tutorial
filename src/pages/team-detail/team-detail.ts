@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -21,11 +21,12 @@ export class TeamDetailPage {
   games: any[];
   team: any = {};
   teamStanding: any = {};
+  isFollowing: boolean = false;
   private tourneyData: any;
   dateFilter: string;
   useDateFilter = false;
 
-  constructor(private nav: NavController, private navParams: NavParams, private eliteApi : EliteApi) {}
+  constructor(private nav: NavController, private navParams: NavParams, private eliteApi : EliteApi, private alertController: AlertController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamDetailPage');
@@ -83,5 +84,30 @@ export class TeamDetailPage {
 
   getScoreWL(game){
     return game.scoreDisplay ? game.scoreDisplay[0] : '';
+  }
+
+  toggleFollow(){
+    if(this.isFollowing){
+      let confirm = this.alertController.create({
+        title: 'Unfollow',
+        message: 'Are you sure you want to unfollow?',
+        buttons: [
+          {
+            text: 'Yes',
+            handler: () => {
+              this.isFollowing = false;
+              //TODO: persist data
+            }
+          },
+          {
+            text: 'No'
+          }
+        ]
+      });
+      confirm.present();
+    } else {
+      this.isFollowing = true;
+      // TODO: persist data
+    }
   }
 }
