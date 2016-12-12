@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
@@ -26,7 +26,7 @@ export class TeamDetailPage {
   dateFilter: string;
   useDateFilter = false;
 
-  constructor(private nav: NavController, private navParams: NavParams, private eliteApi : EliteApi, private alertController: AlertController) {}
+  constructor(private nav: NavController, private navParams: NavParams, private eliteApi : EliteApi, private alertController: AlertController, private toastController: ToastController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TeamDetailPage');
@@ -97,6 +97,13 @@ export class TeamDetailPage {
             handler: () => {
               this.isFollowing = false;
               //TODO: persist data
+
+              let toast = this.toastController.create({
+                message: 'You have unfollowed this team.',
+                duration: 2000,
+                position: 'bottom'
+              });
+              toast.present();
             }
           },
           {
