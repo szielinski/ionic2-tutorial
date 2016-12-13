@@ -18,6 +18,7 @@ export class TeamsPage {
   private allTeams: any;
   private allTeamDivisions: any;
   teams = [];
+  queryText: string ='';
 
   constructor(private nav: NavController, private navParams : NavParams, private elitApi : EliteApi, private loadingController: LoadingController) {}
 
@@ -47,5 +48,18 @@ export class TeamsPage {
 
   itemTapped($event, team){
     this.nav.push(TeamHomePage, team);
+  }
+
+  updateTeams(){
+    let queryTextLower = this.queryText.toLowerCase();
+    let filteredTeams = [];
+    _.forEach(this.allTeamDivisions, td=>{
+      let teams = _.filter(td.divisionTeams, t => (<any>t).name.toLowerCase().includes(queryTextLower));
+      if(teams.length){
+        filteredTeams.push({ divisionName: td.divisionName, divisionTeams: teams});
+      }
+    });
+
+    this.teams = filteredTeams;
   }
 }
