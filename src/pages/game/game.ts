@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { TeamHomePage } from '../pages';
+import { MapPage, TeamHomePage } from '../pages';
 import { EliteApi } from '../../shared/shared';
 /*
   Generated class for the Game page.
@@ -35,7 +35,7 @@ export class GamePage {
   }
 
   goToMap(){
-    //Placeholder
+    this.nav.push(MapPage, this.game);
   }
 
   isWinner(score1, score2){
