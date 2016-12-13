@@ -34,5 +34,6 @@ export class MapPage {
   }
 
   getDirections() { 
+    window.location = `geo:${this.map.lat},${this.map.lng};u=35`; 
   }
 }
